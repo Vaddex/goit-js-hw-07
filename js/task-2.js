@@ -36,12 +36,12 @@ const createGallery = images
   <img
     src="${image.url}" 
     alt="${image.alt}" 
-    width="150"
-    height="120"
+    width="360"
+    height="250"
     class="box-picture">
   </li>`;
   })
   .join("");
-addImg.style.backgroundColor = "teal";
-addImg.style.display = "flex";
+// addImg.style.backgroundColor = "teal";
+// addImg.style.display = "flex";
 addImg.insertAdjacentHTML("beforeend", createGallery);
