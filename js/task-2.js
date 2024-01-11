@@ -27,3 +27,21 @@ const images = [
     alt: 'Zebras on Zebra',
   },
 ];
+
+// create gallery
+const addImg = document.querySelector(".gallery");
+const createGallery = images
+  .map((image) => {
+    return `<li class="img-box">
+  <img
+    src="${image.url}" 
+    alt="${image.alt}" 
+    width="150"
+    height="120"
+    class="box-picture">
+  </li>`;
+  })
+  .join("");
+addImg.style.backgroundColor = "teal";
+addImg.style.display = "flex";
+addImg.insertAdjacentHTML("beforeend", createGallery);
