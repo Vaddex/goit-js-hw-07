@@ -1,12 +1,10 @@
-const controls = document.querySelector('#controls')
-const boxes = document.querySelector('#button')
+const inputElement = document.querySelector('input')
+const btnCreate = document.querySelector('[data-create]')
+const btnDestroy = document.querySelector('[data-destroy]')
+const boxDiv = document.querySelector('#boxes')
 
-const amount = controls.children.item(0)
-// const create = controls.children.item(1)
-// const destroy = controls.children.item(2)
-
-controls.children.item(1).addEventListener('click', createBoxes)
-controls.children.item(2).addEventListener('click', destroyBoxes)
+btnCreate.addEventListener('click', createDivHandler)
+btnDestroy.addEventListener('click', destroyBoxes)
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
@@ -14,22 +12,35 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
+function createDivHandler(event) {
+  const amountBoxes = Number(inputElement.value)
+  
+  if (amountBoxes >= 1 && amountBoxes <= 100) {
+    inputElement.value = ''
+    createBoxes(amountBoxes);
+  }
+}
+
 function createBoxes(amount) {
-  return `
-  <div class="boxBackColor">
-  lol
-  </div>
-  `
+  destroyBoxes()
+  let startSize = 30;
+  const step = 10;
+  const divArray = [];
+
+  for (let i = 0; i < amount; i++) {
+    const newDiv = document.createElement('div')
+    newDiv.style.width = `${startSize}px`
+    newDiv.style.height = `${startSize}px`
+    newDiv.style.backgroundColor = getRandomHexColor()
+    
+    divArray.push(newDiv)
+    startSize += step
+  }
+  boxDiv.append(...divArray)
+  console.log('createBoxes event!', amount);
 }
 
-boxes.insertAdjacentHTML('afterbegin', createBoxes)
-
-function destroyBoxes() {
-  return console.log(amount.value = '');
-
+function destroyBoxes(event) {
+  boxDiv.innerHTML = ''
+  console.log('destroyBoxes event!');
 }
-// console.dir(controls)
-// console.log(amount);
-// console.dir(amount)
-// console.log(create);
-// console.log(destroy);
